@@ -175,6 +175,23 @@ odbcDataType.default <- function(con, obj, ...) {
   )
 }
 
+#' @export
+`odbcDataType.NetezzaSQL <- function(con, obj, ...) {
+  switch_type(
+    obj,
+    factor = "NVARCHAR",
+    datetime = "TIMESTAMP",
+    date = "DATE",
+    binary = "VARBINARY",
+    integer = "INTEGER",
+    double = "DOUBLE",
+    character = "NVARCHAR",
+    logical = "BOOLEAN",
+    list = "NVARCHAR",
+    stop("Unsupported type", call. = FALSE)
+  )
+}
+
 switch_type <- function(obj, ...) {
   switch(object_type(obj), ...)
 }
